@@ -12,6 +12,7 @@ const {
     getAdminProducts,
   } = require("../controllers/productController");
 
-router.route("/products").get(getAllProducts)
+router.route("/products").get(getAllProducts);
+router.route("/product/new").post(createProduct);
 
 module.exports = router;

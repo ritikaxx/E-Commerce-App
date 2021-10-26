@@ -24,7 +24,7 @@ exports.registerUser = catchAsyncErrors(async(req,res,next)=>{
     });
 });
 
-//login 
+//login user
 
 exports.loginUser = catchAsyncErrors(async(req,res,next)=>{
 
@@ -35,11 +35,13 @@ exports.loginUser = catchAsyncErrors(async(req,res,next)=>{
         return next(new ErrorHandler("please enter email and password",400));
     }
 
-    const user = User.findOne({email}).select("+password");
+    const user = await User.findOne({email}).select("+password");
 
     if(!user){
         return next(new ErrorHandler("invalid email or password",400));
     }
+
+    const isPasswordMatched = user.comparePassword(password);
 
     if(!isPasswordMatched){
         return next(new ErrorHandler("invalid email or password",400));

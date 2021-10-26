@@ -23,3 +23,32 @@ exports.registerUser = catchAsyncErrors(async(req,res,next)=>{
         token,
     });
 });
+
+//login 
+
+exports.loginUser = catchAsyncErrors(async(req,res,next)=>{
+
+    const {email, password} = req.body;
+
+    //checking if user has entered email and password
+    if(!email || !password){
+        return next(new ErrorHandler("please enter email and password",400));
+    }
+
+    const user = User.findOne({email}).select("+password");
+
+    if(!user){
+        return next(new ErrorHandler("invalid email or password",400));
+    }
+
+    if(!isPasswordMatched){
+        return next(new ErrorHandler("invalid email or password",400));
+    }
+
+    const token = user.getJWTToken();
+    res.status(201).json({
+        success:true,
+        token,
+    });
+
+})

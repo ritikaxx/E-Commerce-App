@@ -62,3 +62,16 @@ exports.logout = catchAsyncErrors(async(req,res,next)=>{
     });
 });
 
+//forget password
+
+exports.forgotPassword = catchAsyncErrors(async(req,res,next)=>{
+    const user = await User.findOne({email:req.body.email});
+
+    if(!user){
+        return next(new ErrorHandler("User nor found",404));
+    }
+
+    //get reset password token
+    const resetToken =useruser.getResetPasswordToken();
+    
+})

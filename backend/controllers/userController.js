@@ -2,6 +2,7 @@ const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
+const sendEmail = require("../utils/sendEmail");
 
 //register a user
 
@@ -81,9 +82,20 @@ exports.forgotPassword = catchAsyncErrors(async(req,res,next)=>{
     const message = 'your password reset token is :- \n\n  ${resetPasswordUrl} \n\n if you have not requested this iurl , please ignore';
 
     try {
-
+        await sendEmail({
+            email : user.email,
+            subject:''
+        });
+        res.status(200).json({
+            success:true,
+            message:'email sent to ${user.email successfully',
+        })
     }catch (error) {
         user.resetPasswordToekn = undefined;
         user.resetPasswordExpire = undefined;
+
+        await user.save({validateBeforeSave:false});
+
+        return next(new ErrorHandler(error.message,500));
     }
 });

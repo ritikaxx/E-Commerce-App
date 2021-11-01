@@ -73,7 +73,7 @@ exports.forgotPassword = catchAsyncErrors(async(req,res,next)=>{
     }
 
     //get reset password token
-    const resetToken =useruser.getResetPasswordToken();
+    const resetToken =user.getResetPasswordToken();
 
     await user.save({validateBeforeSave:false});
 

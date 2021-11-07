@@ -94,7 +94,7 @@ const orderSchema = new mongoose.Schema({
     orderStatus: {
         type:String,
         required:true,
-        default:"processing",
+        default:"Order is currently processing",
     },
     deliveredAt:Date,
     createdAt: {

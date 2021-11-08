@@ -34,7 +34,7 @@ exports.newOrder = catchAsyncErrors(async (req,res,next)=>{
 
 //get single order
 exports.getSingleOrder = catchAsyncErrors(async (req,res,next)=>{
-    const order = awaitOrder.findById(req.params.id).populate(
+    const order = await Order.findById(req.params.id).populate(
         "user",
         "name email"
     );
@@ -51,7 +51,7 @@ exports.getSingleOrder = catchAsyncErrors(async (req,res,next)=>{
 
 //get logged in user orders
 exports.myOrder = catchAsyncErrors(async(req,res,next)=>{
-    const orders = await Order.findById({user : req.user._id});
+    const orders = await Order.find({user : req.user._id});
     res.status(200).json({
         success:true,
         orders,

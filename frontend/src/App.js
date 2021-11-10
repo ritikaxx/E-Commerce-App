@@ -15,7 +15,7 @@ function App() {
   }, [] );
   return (
      <Router>
-       <Header />    
+       <Header />   
        <Footer />
      </Router>
 

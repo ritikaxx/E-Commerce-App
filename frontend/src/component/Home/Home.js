@@ -20,7 +20,7 @@ const Home = () => {
       alert.error(error);
     }
     dispatch(getProduct());
-  }, [dispatch, error]);
+  }, [dispatch, error, alert]);
 
     return (
    <Fragment>
@@ -48,9 +48,7 @@ const Home = () => {
              <Product product = {product} />
             )}
         </div>
-
-
-
+        
   </Fragment>
      )}
    </Fragment>  

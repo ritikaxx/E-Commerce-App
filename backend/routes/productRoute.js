@@ -15,7 +15,7 @@ const {
 
 router
   .route("/products")
-  .get(isAuthenticatedUser ,getAllProducts);
+  .get(getAllProducts);
 
 router
   .route("/admin/product/new")

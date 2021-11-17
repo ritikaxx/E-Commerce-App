@@ -9,6 +9,7 @@ import ProductDetails from './component/Product/ProductDetails';
 import Products from './component/Product/Products';
 import Search from "./component/Product/Search.js";
 
+
 function App() {
   React.useEffect(()=>{
     WebFont.load({

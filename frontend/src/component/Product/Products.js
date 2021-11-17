@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {getProduct } from "../../actions/productActions";
 import Loader from "../layout/loader/loader";
 import ProductCard from "../Home/ProductCard";
-const Products = () => {
+const Products = ({match}) => {
 
     const dispatch = useDispatch();
 
@@ -13,10 +13,11 @@ const Products = () => {
         loading,
       } = useSelector((state) => state.products);
 
+      const keyword = match.params.keyword;
     useEffect(() => {
 
-        dispatch(getProduct());
-      }, [dispatch]);
+        dispatch(getProduct(keyword));
+      }, [dispatch,keyword]);
 
     return (
         <Fragment>

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./Products.css";
 import { useSelector, useDispatch } from "react-redux";
 import {getProduct } from "../../actions/productActions";
@@ -9,17 +9,24 @@ import Pagination from "react-js-pagination";
 const Products = ({match}) => {
 
     const dispatch = useDispatch();
-
+    const [currentPage, setCurrentPage] = useState(1);
     const {
         products,
         loading,
+        resultPerPage,
+        productsCount,
       } = useSelector((state) => state.products);
 
       const keyword = match.params.keyword;
+
+      const setCurrentPageNo = (e) => {
+        setCurrentPage(e);
+      };
+
     useEffect(() => {
 
-        dispatch(getProduct(keyword));
-      }, [dispatch,keyword]);
+        dispatch(getProduct(keyword,currentPage));
+      }, [dispatch,keyword,currentPage]);
 
     return (
         <Fragment>

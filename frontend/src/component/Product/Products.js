@@ -6,15 +6,21 @@ import Loader from "../layout/loader/loader";
 import ProductCard from "../Home/ProductCard";
 import Pagination from "react-js-pagination";
 
+
 const Products = ({match}) => {
 
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
+    const [category, setCategory] = useState("");
+    const [price, setPrice] = useState([0, 25000]);
     const {
-        products,
-        loading,
-        resultPerPage,
-        productsCount,
+      products,
+      loading,
+      error,
+      productsCount,
+      resultPerPage,
+      categories,
+      filteredProductsCount,
       } = useSelector((state) => state.products);
 
       const keyword = match.params.keyword;
@@ -22,6 +28,12 @@ const Products = ({match}) => {
       const setCurrentPageNo = (e) => {
         setCurrentPage(e);
       };
+
+      const priceHandler = (event, newPrice) => {
+        setPrice(newPrice);
+      };
+
+      let count = filteredProductsCount;
 
     useEffect(() => {
 
@@ -44,7 +56,9 @@ const Products = ({match}) => {
               ))}
           </div>
 
-          <div className="paginationBox">
+     
+          {resultPerPage < count && (
+            <div className="paginationBox">
               <Pagination
                 activePage={currentPage}
                 itemsCountPerPage={resultPerPage}
@@ -60,6 +74,7 @@ const Products = ({match}) => {
                 activeLinkClass="pageLinkActive"
               />
             </div>
+          )}
         </Fragment>
       )}
     </Fragment>

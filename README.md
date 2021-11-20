@@ -8,7 +8,7 @@ ADMIN-
 
         2)UPDATE ORDER STATUS
 
-        3)ADD ADMIN
+        3)ADD/DELETE ADMINS
 
         4)CREATE PRODUCTS
 
